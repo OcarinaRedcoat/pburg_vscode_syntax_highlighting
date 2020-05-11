@@ -1,0 +1,366 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "pburg",
+  "patterns": [
+    {
+      "include": "#declarations"
+    },
+    {
+      "include": "#rules"
+    },
+    {
+      "include": "#epilogue"
+    }
+  ],
+  "repository": {
+    "declarations": {
+      "name": "entity.declarations.pburg",
+      "patterns": [
+        {
+          "include": "#prologue"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#result-type"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#keywords-block"
+        },
+        {
+          "include": "#define"
+        }
+      ]
+    },
+    "rules": {
+      "name": "entity.rules.pburg",
+      "begin": "%%",
+      "end": "%%",
+      "beginCaptures": {
+        "0": {
+          "name": "markup.bold.pburg"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "markup.bold.pburg"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#results"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#character"
+        },
+        {
+          "include": "#nonterminalExtension"
+        },
+        {
+          "include": "#variables"
+        },
+        {
+          "name": "keyword.operator.pburg",
+          "match": "[\\|:;]"
+        },
+        {
+          "name": "keyword.other.pburg",
+          "match": "%(empty|prec)"
+        },
+        {
+          "name": "entity.action.pburg",
+          "begin": "{",
+          "end": "}",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.paren.open"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.paren.close"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#embedded"
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue": {
+      "name": "entity.epilogue.pburg",
+      "patterns": [
+        {
+          "include": "#embedded"
+        }
+      ]
+    },
+    "keywords": {
+      "begin": "^%(option|token-table|token(?=(\\s|<))|expect-rr|expect|nonassoc(?=\\s)|left(?=\\s)|right(?=\\s)|defines|output|precedence|nterm|start|name-prefix|locations|skeleton|glr-parser|language|pure-parser)",
+      "end": "(?=%)",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.other.pburg"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#variables"
+        },
+        {
+          "include": "#types"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#character"
+        }
+      ]
+    },
+    "result-type": {
+      "begin": "^%type(?=(\\s|<))",
+      "end": "(?=%)",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.other.pburg"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#types"
+        },
+        {
+          "name": "support.class.pburg",
+          "match": "[a-zA-Z]+\\w*"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "define": {
+      "begin": "^%define",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.other.pburg"
+        }
+      },
+      "patterns": [
+        {
+          "name": "variable.parameter.pburg",
+          "match": "[a-zA-Z_\\.]+(?=\\s)"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "begin": "{",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "#embedded"
+            }
+          ]
+        }
+      ]
+    },
+    "keywords-block": {
+      "begin": "^%(destructor|union|code( (requires|provides|top|imports))?|printer|parse-param|lex-param)",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.other.pburg"
+        }
+      },
+      "patterns": [
+        {
+          "name": "entity.action.pburg",
+          "begin": "{",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "#embedded"
+            }
+          ]
+        },
+        {
+          "include": "#variables"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "prologue": {
+      "patterns": [
+        {
+          "name": "entity.prologue.pburg",
+          "begin": "%{",
+          "end": "%}",
+          "beginCaptures": {
+            "0": {
+              "name": "markup.inserted.pburg"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "markup.inserted.pburg"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#embedded"
+            }
+          ]
+        },
+        {
+          "name": "entity.prologue.pburg",
+          "begin": "%(top){",
+          "end": "}",
+          "beginCaptures": {
+            "0": {
+              "name": "markup.inserted.pburg"
+            },
+            "1": {
+              "name": "variable.parameter.pburg"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "markup.inserted.pburg"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#embedded"
+            }
+          ]
+        }
+      ]
+    },
+    "number": {
+      "patterns": [
+        {
+          "name": "constant.numeric.pburg",
+          "match": "[0-9]+(x[0-9]+)?(?=\\s)"
+        }
+      ]
+    },
+    "types": {
+      "match": "<([a-zA-Z_*\b]+)>",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.pburg"
+        }
+      }
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.parameter.pburg",
+          "match": "[a-zA-Z_]+\\w*"
+        }
+      ]
+    },
+    "nonterminalExtension": {
+      "begin": "(?<=\\w)\\[",
+      "end": "\\]",
+      "patterns": [
+        {
+          "name": "keyword.variables.pburg",
+          "match": "[a-zA-Z_]+\\w*"
+        }
+      ]
+    },
+    "results": {
+      "patterns": [
+        {
+          "name": "support.class.pburg",
+          "match": "^[a-zA-Z_]+\\w*(?=[\\s:])"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.pburg",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.pburg",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "character": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.pburg",
+          "match": "'(\\\\)?.'"
+        },
+        {
+          "name": "string.quoted.single.pburg",
+          "match": "\"(\\\\)?.\""
+        }
+      ]
+    },
+    "comments": {
+      "name": "comment.block.pburg",
+      "begin": "/\\*",
+      "end": "\\*/"
+    },
+    "comment": {
+      "name": "comment.single.pburg",
+      "begin": "//",
+      "end": "$"
+    },
+    "embedded": {
+      "patterns": [
+        {
+          "include": "source.cpp"
+        },
+        {
+          "include": "source.c"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.brg"
+}

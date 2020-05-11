@@ -1,0 +1,25 @@
+{
+    "name": "pburg-syntax",
+    "displayName": "pburg",
+    "description": "pburg syntax highlighting",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.45.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "pburg",
+            "aliases": ["pburg", "pburg"],
+            "extensions": [".brg"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "pburg",
+            "scopeName": "source.brg",
+            "path": "./syntaxes/pburg.tmLanguage.json"
+        }]
+    }
+}
