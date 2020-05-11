@@ -3,7 +3,7 @@
     "displayName": "pburg",
     "description": "pburg syntax highlighting",
     "version": "0.0.1",
-    "publisher": "OcarinaRedcoat",
+    "publisher": "ocarina--redcoat",
     "icon": "logo/logo.png",
      "homepage": "https://github.com/OcarinaRedcoat/pburg_vscode_syntax_highlighting",
     "engines": {
