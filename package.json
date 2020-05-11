@@ -2,7 +2,7 @@
     "name": "pburg-syntax",
     "displayName": "pburg",
     "description": "pburg syntax highlighting",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "ocarina--redcoat",
     "icon": "logo/logo.png",
      "homepage": "https://github.com/OcarinaRedcoat/pburg_vscode_syntax_highlighting",
@@ -14,7 +14,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://https://github.com/OcarinaRedcoat/pburg_vscode_syntax_highlighting.git"
+        "url": "https://github.com/OcarinaRedcoat/pburg_vscode_syntax_highlighting.git"
     },
     "contributes": {
         "languages": [{
